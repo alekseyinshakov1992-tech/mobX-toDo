@@ -100,3 +100,17 @@ label {
 legend {
 	display: block;
 }
+
+body {
+	
+	background: #0096aa46;	
+}
+
+
+.container {
+	background-color: rgb(166, 206, 211);
+	max-width: 960px;
+	margin: 0 auto;
+	min-height: 100vh;
+	padding: 20px 30px;
+}
