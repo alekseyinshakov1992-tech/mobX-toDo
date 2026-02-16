@@ -1,0 +1,17 @@
+.wrapper{
+  display: flex;
+  column-gap: 15px;
+  font-size: 1.5em;
+}
+
+.item{
+  background-color: beige;
+  padding: 7px 15px;
+  border-radius: 15px;
+  color: black;
+  transition: all 0.3s;
+}
+
+.item:hover {
+  background-color: aquamarine;
+}
