@@ -15,8 +15,8 @@ const MainPage = () => {
 
   return (
     <div className={styles.wrapper}>
-      {todos.map(() => {
-        return <ToDoItem />
+      {todos.map((todo) => {
+        return <ToDoItem title={todo.title} description={todo.description} />
       })}
 
       
