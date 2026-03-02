@@ -1,0 +1,8 @@
+.incompleteButton {
+  background-color: #feffaa;
+  border: 1px solid #00da0b
+}
+
+.incompleteButton:hover {
+  background-color: #fcff36;
+}

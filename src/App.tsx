@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import MainPage from "./pages/main/MainPage";
-import DonePage from "./pages/done/DonePage";
+import MainPage from "./pages/MainPage/MainPage";
+import DonePage from "./pages/CompletedPage/CompletedPage";
 import Header from "./components/Header/Header";
 
 function App() {
