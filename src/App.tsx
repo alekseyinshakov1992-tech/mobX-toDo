@@ -2,6 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage/MainPage";
 
 function App() {
+
+
   return (
     <div className="container">
       <Routes>

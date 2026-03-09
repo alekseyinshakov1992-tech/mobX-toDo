@@ -166,3 +166,9 @@ button {
 .redButton:hover {
   background-color: #ff8b8b;
 }
+
+[type="search"] {
+  background-color: #fff;
+  width: 180px;
+  padding: 5px 10px;
+}

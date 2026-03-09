@@ -4,3 +4,17 @@
   flex-direction: column;
   row-gap: 15px;
 }
+
+.searchPanel {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  column-gap: 30px;
+}
+
+.status{
+  font-size: 1.2em;
+  color: rgb(0, 17, 255);
+  background-color: #c3ffb7;
+  padding: 5px 10px;
+}

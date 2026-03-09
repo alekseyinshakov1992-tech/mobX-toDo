@@ -43,3 +43,15 @@
   justify-content: space-between;
   align-items: end;
 }
+
+.todoHeader{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dateTime{
+  font-style: italic;
+  color: rgb(117, 117, 117);
+  align-self: start;
+}

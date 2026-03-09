@@ -12,7 +12,8 @@ interface ITodoFormProps {
   editConfig?: {
     id: number,
     title: string,
-    description: string
+    description: string,
+    date: string
   }
 }
 
@@ -44,9 +45,12 @@ const TodoForm: FC<ITodoFormProps> = ({ setIsOpen, editConfig }) => {
   const saveButtonHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     if (editConfig) {
-      changeTodo(editConfig.id, {title: formData.title, description: formData.description})
+      changeTodo(editConfig.id, {title: formData.title, description: formData.description, date: editConfig.date})
     } else {
-      addTodo(formData);
+      addTodo({...formData, date: new Date().toLocaleString()} );
+
+      
+
     }
     setIsOpen(false)
   };

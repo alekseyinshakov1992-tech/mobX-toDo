@@ -11,42 +11,51 @@ import TodoForm from "../TodoForm/TodoForm";
 interface ItoDoItemProps {
   title: string;
   description: string;
-  isCompeted: boolean;
+  isCompleted: boolean;
   id: number;
+  date: string
 }
 
 export const ToDoItem: FC<ItoDoItemProps> = ({
   title,
   description,
-  isCompeted,
+  isCompleted,
   id,
+  date
 }) => {
+  const [editMode, setEditMode] = useState(false);
 
-  const [editMode, setEditMode] = useState(false)
-
-  if(editMode) {
-    return <TodoForm setIsOpen={setEditMode} editConfig={{id, title, description}} />
+  if (editMode) {
+    return (
+      <TodoForm
+        setIsOpen={setEditMode}
+        editConfig={{ id, title, description, date }}
+      />
+    );
   }
 
   return (
     <div
-      className={`${styles.wrapper} ${isCompeted ? styles.completedBG : ""}`}
+      className={`${styles.wrapper} ${isCompleted ? styles.completedBG : ""}`}
     >
-      <div className={styles.titleWrapper}>
-        <img
-          className={styles.todoIcon}
-          src={isCompeted ? doneIcon : pendingIcon}
-          alt="status icon"
-        />
-        <h2 className={styles.title}>{title}</h2>
+      <div className={styles.todoHeader}>
+        <div className={styles.titleWrapper}>
+          <img
+            className={styles.todoIcon}
+            src={isCompleted ? doneIcon : pendingIcon}
+            alt="status icon"
+          />
+          <h2 className={styles.title}>{title}</h2>
+        </div>
+        <div className={styles.dateTime}>{date}</div>
       </div>
 
       <div className={styles.description}>{description}</div>
 
       <div className={styles.buttonsWrapper}>
-        {isCompeted ? <IncompleteButton id={id} /> : <CompleteButton id={id} />}
+        {isCompleted ? <IncompleteButton id={id} /> : <CompleteButton id={id} />}
         <div>
-          <EditButton id={id} setEditMode={setEditMode}/>
+          <EditButton id={id} setEditMode={setEditMode} />
           <DeleteButton id={id} />
         </div>
       </div>

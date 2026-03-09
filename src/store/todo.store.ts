@@ -1,36 +1,31 @@
-import { action, autorun, makeObservable, observable, toJS } from "mobx";
+import { action, computed, makeObservable, observable, toJS } from "mobx";
 
-type todoData = { title: string; description: string };
+type Todo = {
+  isCompleted: boolean;
+  id: number;
+  title: string;
+  description: string;
+  date: string;
+};
+type todoData = { title: string; description: string; date: string };
 class toDoStore {
-  todos = [
-    {
-      title: "Изучить mobX",
-      description:
-        "the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      isCompleted: false,
-      id: 1,
-    },
-    {
-      title: "Изучить context",
-      description:
-        "Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.",
-      isCompleted: true,
-      id: 2,
-    },
-  ];
+  todos: Todo[] = [];
+
+  searchValue = "";
 
   constructor() {
     makeObservable(this, {
       todos: observable,
+      searchValue: observable,
       makeComplete: action,
       makeIncomplete: action,
       deleteTodo: action,
       addTodo: action,
-      changeTodo: action
-    });
-    autorun(() => {
-      const data = JSON.stringify(toJS(this.todos));
-      localStorage.setItem("my_todos", data);
+      changeTodo: action,
+      setTodosFromLS: action,
+      setSearchValue: action,
+      filteredTodos: computed,
+      statistic: computed
     });
   }
 
@@ -50,14 +45,21 @@ class toDoStore {
 
   deleteTodo = (id: number) => {
     this.todos = this.todos.filter((item) => item.id !== id);
+    this.saveTodosToLS();
   };
 
   addTodo = (todoData: todoData) => {
-    const lastId = Math.max(...this.todos.map((item) => item.id));
+    let lastId = 0;
+
+    if (this.todos.length) {
+      lastId = Math.max(...this.todos.map((item) => item.id));
+    }
+
     this.todos = [
       { id: lastId + 1, isCompleted: false, ...todoData },
       ...this.todos,
     ];
+    this.saveTodosToLS();
   };
 
   changeTodo = (id: number, todoData: todoData) => {
@@ -67,7 +69,43 @@ class toDoStore {
       targetTodo.description = todoData.description;
       targetTodo.title = todoData.title;
     }
+    this.saveTodosToLS();
   };
+
+  setTodosFromLS = () => {
+    const localStorageStringTodos = localStorage.getItem("my_todos");
+    if (localStorageStringTodos) {
+      this.todos = JSON.parse(localStorageStringTodos);
+    }
+  };
+
+  saveTodosToLS = () => {
+    const data = JSON.stringify(toJS(this.todos));
+    localStorage.setItem("my_todos", data);
+  };
+
+  setSearchValue = (value: string) => {
+    this.searchValue = value
+  }
+
+  get filteredTodos() {
+    const search = this.searchValue.toLowerCase();
+    return this.todos.filter(
+      (todo) =>
+        todo.title.toLowerCase().includes(search) ||
+        todo.description.toLowerCase().includes(search),
+    );
+  }
+
+  get statistic() {
+    const completed = this.todos.filter(todo => todo.isCompleted).length
+    const inCompleted = this.todos.filter(todo => !todo.isCompleted).length
+    return {
+      completed,
+      inCompleted,
+      all: this.todos.length
+    }
+  }
 }
 
 export default new toDoStore();
