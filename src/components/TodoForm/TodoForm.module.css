@@ -1,0 +1,21 @@
+.createForm {
+  background-color: #c0f8ff;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.createForm input {
+  background-color: #fff;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.createForm textarea {
+  background-color: #fff;
+  resize: none;
+  padding: 5px 10px;
+  border-radius: 10px;
+}

@@ -1,5 +1,6 @@
-import { action, makeObservable, observable } from "mobx";
+import { action, autorun, makeObservable, observable, toJS } from "mobx";
 
+type todoData = { title: string; description: string };
 class toDoStore {
   todos = [
     {
@@ -22,7 +23,14 @@ class toDoStore {
     makeObservable(this, {
       todos: observable,
       makeComplete: action,
-      deleteTodo: action
+      makeIncomplete: action,
+      deleteTodo: action,
+      addTodo: action,
+      changeTodo: action
+    });
+    autorun(() => {
+      const data = JSON.stringify(toJS(this.todos));
+      localStorage.setItem("my_todos", data);
     });
   }
 
@@ -31,18 +39,35 @@ class toDoStore {
     if (!todo) return;
 
     todo.isCompleted = true;
-  }
+  };
 
   makeIncomplete = (id: number) => {
     const todo = this.todos.find((item) => item.id === id);
     if (!todo) return;
 
     todo.isCompleted = false;
-  }
+  };
 
   deleteTodo = (id: number) => {
-   this.todos = this.todos.filter(item => item.id !== id)
-  }
+    this.todos = this.todos.filter((item) => item.id !== id);
+  };
+
+  addTodo = (todoData: todoData) => {
+    const lastId = Math.max(...this.todos.map((item) => item.id));
+    this.todos = [
+      { id: lastId + 1, isCompleted: false, ...todoData },
+      ...this.todos,
+    ];
+  };
+
+  changeTodo = (id: number, todoData: todoData) => {
+    const targetTodo = this.todos.find((todo) => todo.id === id);
+
+    if (targetTodo) {
+      targetTodo.description = todoData.description;
+      targetTodo.title = todoData.title;
+    }
+  };
 }
 
 export default new toDoStore();

@@ -1,10 +1,12 @@
-import type { FC } from "react";
+import { useState, type FC } from "react";
 import styles from "./ToDoItem.module.css";
 import doneIcon from "./icons/checked.png";
 import pendingIcon from "./icons/clocks.png";
 import DeleteButton from "./DeleteButton/DeleteButton";
 import CompleteButton from "./CompleteButton/CompleteButton";
 import IncompleteButton from "./IncomlpleteButton/IncompleteButton";
+import EditButton from "./EditButton/EditButton";
+import TodoForm from "../TodoForm/TodoForm";
 
 interface ItoDoItemProps {
   title: string;
@@ -19,6 +21,13 @@ export const ToDoItem: FC<ItoDoItemProps> = ({
   isCompeted,
   id,
 }) => {
+
+  const [editMode, setEditMode] = useState(false)
+
+  if(editMode) {
+    return <TodoForm setIsOpen={setEditMode} editConfig={{id, title, description}} />
+  }
+
   return (
     <div
       className={`${styles.wrapper} ${isCompeted ? styles.completedBG : ""}`}
@@ -36,7 +45,10 @@ export const ToDoItem: FC<ItoDoItemProps> = ({
 
       <div className={styles.buttonsWrapper}>
         {isCompeted ? <IncompleteButton id={id} /> : <CompleteButton id={id} />}
-        <DeleteButton id={id} />
+        <div>
+          <EditButton id={id} setEditMode={setEditMode}/>
+          <DeleteButton id={id} />
+        </div>
       </div>
     </div>
   );
