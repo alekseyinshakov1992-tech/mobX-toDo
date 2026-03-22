@@ -4,6 +4,7 @@ import todoStore from "../../store/todo.store";
 import { observer } from "mobx-react-lite";
 import CreatePanel from "../../components/CreatePanel/CreatePanel";
 import { useEffect, type ChangeEventHandler } from "react";
+import { ThemeSwitcher } from "../../components/ThemeSwicher/ThemeSwicher";
 
 const MainPage = observer(() => {
   const { filteredTodos, setTodosFromLS, searchValue, setSearchValue, statistic } =
@@ -30,6 +31,7 @@ const MainPage = observer(() => {
         <div className={styles.status}>
           Completed: {statistic.completed} / {statistic.all}
         </div>
+        <ThemeSwitcher />
       </div>
 
       {filteredTodos.map((todo) => {
