@@ -1,24 +1,29 @@
 import { Switch } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext } from "react";
+import { ThemeContext } from "../../context/themeContext";
 
 export const ThemeSwitcher = () => {
-  const [checked, setChecked] = useState(false);
+  const context = useContext(ThemeContext);
 
   const onCheckerChange = () => {
-    setChecked(!checked)
-    
-  }
-  
+    console.log(666);
+
+    context?.toggleTheme();
+  };
 
   return (
-    <Switch.Root
-      colorPalette={"blue"}
-      onCheckedChange={onCheckerChange}
-      checked={checked}
-    >
-      <Switch.HiddenInput />
-      <Switch.Control />
-      <Switch.Label>Dark mode</Switch.Label>
-    </Switch.Root>
+    <div>
+      <span> </span>
+      <Switch.Root
+        colorPalette={"blue"}
+        onCheckedChange={onCheckerChange}
+        checked={context?.theme === "dark"}
+      >
+        <Switch.HiddenInput />
+        <Switch.Control />
+        <Switch.Label>🌙</Switch.Label>
+      </Switch.Root>
+      
+    </div>
   );
 };

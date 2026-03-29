@@ -87,6 +87,7 @@ select {
   font-size: inherit;
   color: inherit;
   background-color: transparent;
+  letter-spacing: 0.8px;
 }
 
 input::-ms-clear {
@@ -129,6 +130,12 @@ textarea:focus {
 body {
   font-family: Arial, Helvetica, sans-serif;
   background: #0096aa46;
+  letter-spacing: 0.5px;
+}
+
+body .dark {
+  background: #003238;
+  color: #fff;
 }
 
 .container {
@@ -137,6 +144,10 @@ body {
   margin: 0 auto;
   min-height: 100vh;
   padding: 15px 30px;
+}
+
+.dark .container  {
+  background-color: rgb(15, 71, 78);
 }
 
 button {
@@ -150,6 +161,10 @@ button {
   background-color: #aeff9e;
 	border: solid 1px #06b100;
   margin-top: 0;
+}
+
+.dark .greenButton {
+  background-color: #178700;
 }
 
 .greenButton:hover {
@@ -172,3 +187,4 @@ button {
   width: 180px;
   padding: 5px 10px;
 }
+

@@ -1,15 +1,19 @@
-.wrapper{
+.wrapper {
   background-color: #efffaa;
   padding: 15px 25px;
   border-radius: 10px;
 }
 
-.title{
+:global(.dark) .wrapper {
+  background-color: #859737;
+}
+
+.title {
   font-size: 1.3em;
   font-weight: 600;
 }
 
-.description{
+.description {
   word-spacing: 4px;
   line-height: 1.5;
   margin-top: 10px;
@@ -21,13 +25,17 @@
   column-gap: 7px;
 }
 
-.todoIcon{
+.todoIcon {
   width: 30px;
   height: 30px;
 }
 
 .completedBG {
   background-color: #b3ffb3;
+}
+
+:global(.dark) .completedBG {
+  background-color: #518d51;
 }
 
 .incompleteButtonBG {
@@ -38,20 +46,24 @@
   background-color: #fcff36;
 }
 
-.buttonsWrapper{
+.buttonsWrapper {
   display: flex;
   justify-content: space-between;
   align-items: end;
 }
 
-.todoHeader{
+.todoHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.dateTime{
+.dateTime {
   font-style: italic;
   color: rgb(117, 117, 117);
   align-self: start;
+}
+
+:global(.dark) .dateTime {
+  color: rgb(255, 255, 255);
 }

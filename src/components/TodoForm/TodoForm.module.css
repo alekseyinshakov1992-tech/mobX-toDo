@@ -7,6 +7,11 @@
   border-radius: 10px;
 }
 
+:global(.dark) .createForm {
+  background-color: #007f90;
+  color: black
+}
+
 .createForm input {
   background-color: #fff;
   padding: 5px 10px;
